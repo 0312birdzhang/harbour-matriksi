@@ -1,7 +1,7 @@
 import QtQuick 2.2
 import Sailfish.Silica 1.0
 import "pages"
-import io.thp.pyotherside 1.4
+import io.thp.pyotherside 1.5
 import Matriksi 1.0
 
 

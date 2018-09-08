@@ -2,11 +2,18 @@ import pyotherside
 
 import sys
 import time
+import logging
 
 from client import MatrixClient, Room
 from api import MatrixRequestError
 from requests.exceptions import MissingSchema
 
+logger = logging.getLogger("Matriksi")
+formatter = logging.Formatter('%(asctime)s %(levelname)-8s: %(message)s')
+console_handler = logging.StreamHandler(sys.stdout)
+console_handler.formatter = formatter
+logger.addHandler(console_handler)
+logger.setLevel(logging.DEBUG)
 
 class PyClient ():
     def __init__(self):
@@ -46,21 +53,27 @@ class PyClient ():
             name = None
             topic = self.client.rooms[room].topic
             name = self.client.rooms[room].name
+            logger.error("name 1: {}".format(name))
             if name == None:
                 count = len(self.client.rooms[room].aliases)
                 if count > 0:
                     name = self.client.rooms[room].aliases[0]
+                    logger.error("name 2: {}".format(name))
                 if name == None:
                     members = self.client.rooms[room].get_joined_members()
                     keys = list(members.keys())
                     #pyotherside.send(keys[0])
                     name = members[keys[0]]['displayname']
+                    logger.error("name 3: {}".format(name))
                     if name == None:
                         name = keys[0]
-                    if name == self.client.user_id:
+                        logger.error("name 4: {}".format(name))
+                    elif name == self.client.user_id:
                         name = members[keys[1]]['displayname']
+                        logger.error("name 5: {}".format(name))
                         if name == None:
                             name = keys[1]
+                            logger.error("name 6: {}".format(name))
             members = self.client.rooms[room].get_joined_members()
             rooms[room] = {'displayname': name, 'members': members, 'topic': topic}
             #rooms[['displayname'] = name

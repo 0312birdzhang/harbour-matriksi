@@ -6,7 +6,7 @@
     <message>
         <location filename="../qml/pages/AboutPage.qml" line="18"/>
         <source>About Matriksi</source>
-    	<translation>Über Matriksi</translation>
+        <translation>Über Matriksi</translation>
     </message>
     <message>
         <location filename="../qml/pages/AboutPage.qml" line="62"/>
@@ -16,7 +16,7 @@
     <message>
         <location filename="../qml/pages/AboutPage.qml" line="71"/>
         <source>Matriksi is an unofficial Matrix Client for SailfishOS and distributed under the GPLv3 license.</source>
-	<translation>Matriksi ist ein inoffizieller Matrix-Client für SailfishOS und wird unter der GPLv3 vertrieben.</translation>        
+        <translation>Matriksi ist ein inoffizieller Matrix-Client für SailfishOS und wird unter der GPLv3 vertrieben.</translation>
     </message>
     <message>
         <location filename="../qml/pages/AboutPage.qml" line="83"/>
@@ -32,7 +32,7 @@
         <location filename="../qml/pages/AboutPage.qml" line="100"/>
         <source>Translations</source>
         <translation>Übersetzungen</translation>
-</message>
+    </message>
 </context>
 <context>
     <name>ChatPage</name>
