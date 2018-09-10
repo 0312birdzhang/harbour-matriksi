@@ -22,9 +22,9 @@ Page {
         PullDownMenu {
 
             MenuItem {
-                 text: qsTr("About Matriksi")
-                 onClicked: pageStack.push(aboutPage)
-             }
+                text: qsTr("About Matriksi")
+                onClicked: pageStack.push(aboutPage)
+            }
 
             MenuItem {
                 text: qsTr("Settings")
@@ -33,17 +33,19 @@ Page {
                 }
             }
 
-        MenuItem {
-            text: qsTr("Logout")
-            onClicked:  {
-                py.call('pyclient.client.client.logout', [], function () {
-                    settings.setValue("user", "")
-                    initialized = false
-                    showlogin = true
-                });
+            MenuItem {
+                text: qsTr("Logout")
+                onClicked:  {
+                    remorse.execute("Start logout...",function(){
+                        py.call('pyclient.client.client.logout', [], function () {
+                            settings.setValue("user", "")
+                            initialized = false
+                            showlogin = true
+                        });
+                    },3000);
+                }
             }
         }
-     }
 
         model: myRooms
         header: PageHeader{
@@ -59,14 +61,14 @@ Page {
                 x: Theme.paddingMedium
                 width: parent.width - x-x
 
-            AvatarImage {
-                id: roomAvatar
-                iconSource: "qrc:///res/harbour-matrix.png"
-                iconSize: Theme.paddingLarge + Theme.paddingMedium
-                anchors.verticalCenter: parent.verticalCenter
-            }
+                AvatarImage {
+                    id: roomAvatar
+                    iconSource: "qrc:///res/harbour-matrix.png"
+                    iconSize: Theme.paddingLarge + Theme.paddingMedium
+                    anchors.verticalCenter: parent.verticalCenter
+                }
 
-             Label {
+                Label {
                     text: model.unreadmessages > 0 ? model.name+ " ("+model.unreadmessages+")" : model.name
                     font.bold: (model.unreadmessages > 0)
                     truncationMode: TruncationMode.Fade
@@ -99,18 +101,18 @@ Page {
         }
     }
 
-            TextField {
-                id: textEntry
-                width: parent.width
-                anchors.bottom: parent.bottom
-                placeholderText: qsTr("Join room...")
-                EnterKey.onClicked: {py.call('pyclient.client.join_room', [text]); text = "" }
-            }
+    TextField {
+        id: textEntry
+        width: parent.width
+        anchors.bottom: parent.bottom
+        placeholderText: qsTr("Join room...")
+        EnterKey.onClicked: {py.call('pyclient.client.join_room', [text]); text = "" }
+    }
 
     onStatusChanged: {
-      if (status === PageStatus.Active && pageStack.depth === 1) {
-          currentRoom = ""
-      }
+        if (status === PageStatus.Active && pageStack.depth === 1) {
+            currentRoom = ""
+        }
     }
 }
 

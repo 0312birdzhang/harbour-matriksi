@@ -15,6 +15,7 @@ WorkerScript.onMessage = function(events) {
             }
         } else {
             if (events[i].type == "m.room.message") {
+                console.log("message type:",events[i].content.msgtype)
                 if (events[i].content.msgtype == "m.text") {
                     eventType = eventType + "text"
                     //if (events[i].content.hasOwnProperty("formatted_body")) content = events[i].content.formatted_body
@@ -67,7 +68,13 @@ function stringToColour(str) {
 function urlify(text) {
     var urlRegex = /(https?:\/\/[^\s]+)/g;
     return text.replace(urlRegex, function(url) {
-        return '<a href="' + url + '">' + url + '</a>';
+//        var richUrl = '<style>a:link { color: ' + Theme.highlightColor + '; }</style><a href="' + url + '">' + url + '</a>';
+        var richUrl = '<a href="' + url + '">' + url + '</a>';
+        if(/.(png|jpg|jpeg|webp|svg|gif)$/g.test(url)) {
+            return richUrl + ' <img src="' + url + '"/>';
+        }else{
+            return richUrl;
+        }
     })
     // or alternatively
     // return text.replace(urlRegex, '<a href="$1">$1</a>')

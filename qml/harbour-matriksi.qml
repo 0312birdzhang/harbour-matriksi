@@ -60,7 +60,12 @@ ApplicationWindow
     function urlify(text) {
         var urlRegex = /(https?:\/\/[^\s]+)/g;
         return text.replace(urlRegex, function(url) {
-            return '<a href="' + url + '">' + url + '</a>';
+            var richUrl = '<a href="' + url + '">' + url + '</a>';
+            if(/.(png|jpg|jpeg|webp|svg|gif)$/g.test(url)) {
+                return richUrl + ' <img src="' + url + '" />';
+            }else{
+                return richUrl;
+            }
         })
         // or alternatively
         // return text.replace(urlRegex, '<a href="$1">$1</a>')
@@ -225,6 +230,10 @@ ApplicationWindow
         Component.onCompleted: {
 
         }
+    }
+
+    RemorsePopup {
+        id: remorse
     }
 }
 

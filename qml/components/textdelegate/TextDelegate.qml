@@ -64,12 +64,23 @@ Component {
                 width: parent.width - x
                 height: modelitem.eventType == "m.room.message" ? undefined:  lineCount* font.pixelSize + Theme.paddingMedium
                 id: chattext
-                text: modelitem.content
+                textFormat: Text.RichText
+                // linkColor: Theme.highlightColor
+                text: {
+                    var html = modelitem.content.replace(/<a href=/g,"<a style='color:"+Theme.highlightColor+"' target='_blank' href=");
+                    html = html.replace(/<a class=/g,"<a style='color:"+Theme.highlightColor+"' target='_blank' class=");
+                    return html;
+                }
                 verticalAlignment: Text.AlignBottom
                 horizontalAlignment: modelitem.eventType == "m.room.message" ? Text.AlignLeft : Text.AlignHCenter
                 color: modelitem.eventType == "m.room.message" ? Theme.primaryColor: Theme.secondaryColor
                 wrapMode: Text.WordWrap
                 font.pixelSize: modelitem.eventType == "m.room.message" ? Theme.fontSizeSmall : Theme.fontSizeTiny
+                onLinkActivated: {
+                    remorse.execute("Opening link...",function(){
+                        Qt.openUrlExternally(link);
+                    },3000);
+                }
             }
         }
 

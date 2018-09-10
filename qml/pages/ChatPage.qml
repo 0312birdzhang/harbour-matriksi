@@ -23,8 +23,21 @@ Page {
              id: textEntryItem
              width: chatView.width
              height: textEntry.height
+
+             IconButton{
+                 id: imgButton
+                 anchors:{
+                     left: parent.left
+                     bottom: parent.bottom
+                     bottomMargin: Theme.paddingLarge
+                 }
+                 icon.source: "image://theme/icon-m-image"
+                 onClicked: {
+                     console.log("not implement yet")
+                 }
+             }
              TextArea {
-                width: parent.width - sendButton.width
+                width: parent.width - sendButton.width - imgButton.width
                 id: textEntry
                 placeholderText: qsTr("Message @") + joinedRooms[currentRoom].displayname
                 EnterKey.onClicked: {
