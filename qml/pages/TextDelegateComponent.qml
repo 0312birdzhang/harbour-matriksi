@@ -63,8 +63,10 @@ import Sailfish.Silica 1.0
                 x: parent.x + Theme.paddingLarge + Theme.paddingMedium
                 width: parent.width - x
                 height: undefined
+//                height: model.eventType == "m.room.message" ? undefined:  lineCount* font.pixelSize + Theme.paddingMedium
                 id: chattext
-                text: model.content
+                text: model.content + '<style>a:link { color: ' + Theme.highlightColor + '; }</style>';
+                textFormat: Text.RichText
                 verticalAlignment: Text.AlignBottom
                 horizontalAlignment: Text.AlignLeft
                 color: Theme.primaryColor

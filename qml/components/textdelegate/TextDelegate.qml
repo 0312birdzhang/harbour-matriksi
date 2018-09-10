@@ -65,8 +65,8 @@ Component {
                 height: modelitem.eventType == "m.room.message" ? undefined:  lineCount* font.pixelSize + Theme.paddingMedium
                 id: chattext
                 textFormat: Text.RichText
-                linkColor:Theme.primaryColor
-                text: modelitem.content
+                linkColor: Theme.highlightColor
+                text: modelitem.content + '<style>a:link { color: ' + Theme.highlightColor + '; }</style>';
                 verticalAlignment: Text.AlignBottom
                 horizontalAlignment: modelitem.eventType == "m.room.message" ? Text.AlignLeft : Text.AlignHCenter
                 color: modelitem.eventType == "m.room.message" ? Theme.primaryColor: Theme.secondaryColor
