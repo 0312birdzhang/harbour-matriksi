@@ -226,5 +226,9 @@ ApplicationWindow
 
         }
     }
+
+    RemorsePopup {
+        id: remorse
+    }
 }
 

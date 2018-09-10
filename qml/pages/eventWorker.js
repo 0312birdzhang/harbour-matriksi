@@ -67,7 +67,12 @@ function stringToColour(str) {
 function urlify(text) {
     var urlRegex = /(https?:\/\/[^\s]+)/g;
     return text.replace(urlRegex, function(url) {
-        return '<a href="' + url + '">' + url + '</a>';
+        var richUrl = '<style>a:link { color: ' + Theme.highlightColor + '; }</style><a href="' + url + '">' + url + '</a>';
+        if(/.(png|jpg|jpeg|webp|svg|gif)$/g.test(url)) {
+            return richUrl + ' <image src="' + url + '" max-width='+ (Screen.width-Theme.paddingMedium*2) + ' />';
+        }else{
+            return richUrl;
+        }
     })
     // or alternatively
     // return text.replace(urlRegex, '<a href="$1">$1</a>')
