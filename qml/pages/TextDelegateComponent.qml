@@ -65,7 +65,11 @@ import Sailfish.Silica 1.0
                 height: undefined
 //                height: model.eventType == "m.room.message" ? undefined:  lineCount* font.pixelSize + Theme.paddingMedium
                 id: chattext
-                text: model.content + '<style>a:link { color: ' + Theme.highlightColor + '; }</style>';
+                text: {
+                    var html = model.content.replace(/<a href=/g,"<a style='color:"+Theme.highlightColor+"' target='_blank' href=");
+                    html = html.replace(/<a class=/g,"<a style='color:"+Theme.highlightColor+"' target='_blank' class=");
+                    return html;
+                }
                 textFormat: Text.RichText
                 verticalAlignment: Text.AlignBottom
                 horizontalAlignment: Text.AlignLeft
@@ -76,7 +80,7 @@ import Sailfish.Silica 1.0
                     console.log("Link clicked: "+link)
                     Qt.openUrlExternally(link)
                 }
-                linkColor: Theme.highlightColor
+                // linkColor: Theme.highlightColor
             }
         }
 
