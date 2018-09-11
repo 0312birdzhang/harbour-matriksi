@@ -37,7 +37,7 @@
 <context>
     <name>ChatPage</name>
     <message>
-        <location filename="../qml/pages/ChatPage.qml" line="29"/>
+        <location filename="../qml/pages/ChatPage.qml" line="46"/>
         <source>Message @</source>
         <translation>Mensaje @</translation>
     </message>

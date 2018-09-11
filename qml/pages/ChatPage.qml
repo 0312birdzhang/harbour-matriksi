@@ -26,7 +26,7 @@ Page {
 
              IconButton{
                  id: imgButton
-                 anchors:{
+                 anchors{
                      left: parent.left
                      bottom: parent.bottom
                      bottomMargin: Theme.paddingLarge
@@ -39,6 +39,10 @@ Page {
              TextArea {
                 width: parent.width - sendButton.width - imgButton.width
                 id: textEntry
+                anchors{
+                    left: imgButton.right
+                    bottom: parent.bottom
+                }
                 placeholderText: qsTr("Message @") + joinedRooms[currentRoom].displayname
                 EnterKey.onClicked: {
                     //sendLine(text)
